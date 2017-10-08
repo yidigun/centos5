@@ -1,11 +1,22 @@
 # CentOS 5.11 (vault)
 
-CentOS 5 image (docker.io/centos:5) does not suppored any more. (EOL 31 Mar 2017)
-So I modify ```/etc/yum.repos.d/CentOS-Base.repo``` to see http://vault.centos.org/5.11/.
+Since 31 Mar 2017, CentOS 5 is not supported any more.
+If you run a container using ```centos:5``` image, ```yum``` will not work.
 
-And it seems ```libselinux-python``` pacakge has a bug.
+### Yum repository
+
+* Disable fastmirror plugin.
+* Set ```baseurl``` of repos to http://vault.centos.org/5.11/. (base, extras, updates)
+
+### ```libselinux-python``` packaging bug
+
+it seems ```libselinux-python``` pacakge has a bug.
 When install SELinux aware package, ```yum``` will try to install wrong dependancy.
-I fixed this with forced pre-installation of ```libselinux-python.\`uname -m\````.
+To fix this, I have to install ```libeselinux-python``` package with ```--nodeps```.
+
+```
+rpm -ivh --nodeps http://vault.centos.org/5.11/os/x86_64/CentOS/libselinux-python-1.33.4-5.7.el5.`uname -m`.rpm
+```
 
 ## Usage
 
