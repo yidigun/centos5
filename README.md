@@ -3,15 +3,15 @@
 Since 31 Mar 2017, CentOS 5 is not supported any more.
 If you run a container using ```centos:5``` image, ```yum``` will not work.
 
-### Yum repository
+### YUM Repository
 
 * Disable fastmirror plugin.
 * Set ```baseurl``` of repos to http://vault.centos.org/5.11/. (base, extras, updates)
 
-### ```libselinux-python``` packaging bug
+### ```libselinux-python``` bug
 
-it seems ```libselinux-python``` pacakge has a bug.
-When install SELinux aware package, ```yum``` will try to install wrong dependancy.
+It seems ```libselinux-python``` pacakge has a bug.
+When install SELinux aware package, ```yum``` will try to install wrong dependency.
 To fix this, I have to install ```libeselinux-python``` package with ```--nodeps```.
 
 ```
